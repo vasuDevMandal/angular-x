@@ -2,11 +2,12 @@ import { Component, computed, EventEmitter, Input, input, Output, output} from '
 
 import { User } from './user.model';
 import { CardComponent } from '../shared/card/card.component';
+import { MyUppercasePipe } from '../myUpperCase.pipe';
   
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [CardComponent],
+  imports: [CardComponent, MyUppercasePipe],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
