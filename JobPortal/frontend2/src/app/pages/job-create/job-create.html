@@ -1,0 +1,30 @@
+<div class="job-create-container" style="max-width:400px;margin:auto;padding-top:40px;">
+  <form [formGroup]="jobForm" (ngSubmit)="onSubmit()">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Create Job</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title" required>
+          <mat-error *ngIf="jobForm.get('title')?.invalid && jobForm.get('title')?.touched">Title is required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Company</mat-label>
+          <input matInput formControlName="company" required>
+          <mat-error *ngIf="jobForm.get('company')?.invalid && jobForm.get('company')?.touched">Company is required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description" required></textarea>
+          <mat-error *ngIf="jobForm.get('description')?.invalid && jobForm.get('description')?.touched">Description is required</mat-error>
+        </mat-form-field>
+        <div *ngIf="errorMsg" style="color:red;margin-bottom:10px;">{{errorMsg}}</div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" type="submit" [disabled]="loading">Create Job</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>

@@ -1,5 +1,5 @@
 import { Component, computed, DestroyRef, effect, inject, OnInit, signal } from '@angular/core';
-import { interval, map, Observable } from 'rxjs';
+import { from, interval, map, Observable, of, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -30,6 +30,18 @@ export class AppComponent implements OnInit{
     },1000)
   })
 
+  myObservable$ = new Observable((subscriber) =>{
+    subscriber.next(1);
+    subscriber.next(2);
+
+    setTimeout(() => {
+      subscriber.complete();
+    },1000)
+  } );
+
+  mySubject$ = new Subject();
+  
+
   constructor(){
       // this.inter = setInterval(() => {
       //   this.num.update((num) => num + 1 )
@@ -44,19 +56,49 @@ export class AppComponent implements OnInit{
 
     }
   ngOnInit(): void {   
-    const sub = this.customInterval$.subscribe({
-      next: (val) =>console.log(val),
-      complete: () => console.log("Completed..")    
-    })
+    // const sub = this.customInterval$.subscribe({
+    //   next: (val) =>console.log(val),
+    //   complete: () => console.log("Completed..")    
+    // })
+
     // const subscription = interval(1000).pipe(
     //   map((val) => val * 2)
     // ).subscribe({
     //   next: (val) => console.log(val) 
     // })
+    
+
+    const mySub = this.myObservable$.subscribe({
+      next: (val) => console.log(val),
+      complete: () => console.log('observal complete'),
+      error: (err) => console.log(err)  
+    })
+
+    
+
+    const mySubjectSub = this.mySubject$.subscribe({
+      next: (val) => console.log('A observer: ', val) 
+    })
+
+    const mySubjectSub2 = this.mySubject$.subscribe({
+      next: (val) => console.log('B observer: ', val) 
+    })
+
+    this.mySubject$.next(1);
+
+    const subjectObservable1$ = from([11,22,33])
+    // const subjectObservable1$ = of(11,22,[33,56])
+    subjectObservable1$.subscribe(this.mySubject$)
+
 
     this.destroyRef.onDestroy(() => {
       // subscription.unsubscribe();  
-      sub.unsubscribe();  
+      // sub.unsubscribe(); 
+
+      mySub.unsubscribe();
+
+      mySubjectSub.unsubscribe();
+      mySubjectSub2.unsubscribe();
     })
 
     // setTimeout(() => {
@@ -67,6 +109,8 @@ export class AppComponent implements OnInit{
     //     // subscription.unsubscribe();
     //   },2000)
     // },5000)
+
+
   }
 
 }

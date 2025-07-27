@@ -9,7 +9,7 @@ import { debounceTime } from 'rxjs';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   private form = viewChild<NgForm>('form');
   // @ViewChild('form') form2!:NgForm
   constructor(){
@@ -42,12 +42,6 @@ export class LoginComponent implements OnInit {
       //   next:(val) => console.log(val)
       // })
     })
-
-      
-  }
-  ngOnInit(): void {
-    
-    
 
   }
   

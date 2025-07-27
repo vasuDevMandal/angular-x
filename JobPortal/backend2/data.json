@@ -1,0 +1,39 @@
+{
+  "users": [
+    {
+      "username": "testuser",
+      "password": "testpass"
+    },
+    {
+      "username": "admin",
+      "password": "1234"
+    }
+  ],
+  "jobs": [
+    {
+      "id": 1,
+      "title": "Frontend Developer",
+      "company": "TechCorp",
+      "location": "Remote",
+      "description": "Build modern web apps."
+    },
+    {
+      "title": "sdf",
+      "company": "sgfg",
+      "description": "dfgdfgfd",
+      "id": 1753617003935
+    },
+    {
+      "title": "fdgfdg",
+      "company": "dfgdfg",
+      "description": "dfgdfgfdg",
+      "id": 1753617009566
+    },
+    {
+      "title": "fgfgj",
+      "company": "fjfjfhj",
+      "description": "fjhjhfghj",
+      "id": 1753617327223
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+<div class="job-list-container" style="max-width:800px;margin:auto;padding-top:40px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;">
+    <h2>Job Listings</h2>
+    @if (isLoggedIn) {
+      <a mat-raised-button color="primary" [routerLink]="['/job-create']" style="text-decoration:none;">Create Job</a>
+    }
+  </div>
+  <div *ngIf="loading" style="margin:20px 0;">Loading jobs...</div>
+  <div *ngIf="errorMsg" style="color:red;margin-bottom:10px;">{{errorMsg}}</div>
+  <div *ngIf="jobs.length === 0 && !loading">No jobs found.</div>
+  <div *ngFor="let job of jobs">
+    <mat-card style="margin-bottom:20px;">
+      <mat-card-title>{{job.title}}</mat-card-title>
+      <mat-card-content>
+        <div><strong>Company:</strong> {{job.company}}</div>
+        <div><strong>Description:</strong> {{job.description}}</div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
